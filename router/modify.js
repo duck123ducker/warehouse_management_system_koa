@@ -5,6 +5,7 @@ const {packages} = require('../db/models.js')
 modify.post('/', async(ctx) => {
     const {id} = ctx.request.body
     let result = await packages.findOne({ id: id })
+    delete ctx.request.body.access_log
     Object.assign(result, ctx.request.body)
     await result.save()
     ctx.body = 'success'
