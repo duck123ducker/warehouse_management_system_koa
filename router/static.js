@@ -1,11 +1,13 @@
 const Router = require('koa-router');
 const static_ = new Router();
-const {packages} = require('../db/models.js')
+const {packages,users} = require('../db/models.js')
 
 static_.get('/', async(ctx) => {
-    const count = await packages.countDocuments().exec()
+    const pack_count = await packages.countDocuments().exec()
+    const user_count = await users.countDocuments().exec()
     ctx.body = {
-        total_num: count
+        pack_num: pack_count,
+        user_num: user_count
     }
 })
 

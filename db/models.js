@@ -13,5 +13,20 @@ const packageSchema = new mongoose.Schema({
         }
     ],
 })
+const userSchema = new mongoose.Schema({
+    id: String,
+    passwd: String,
+    nick_name: String,
+    role: String, //none, read, write, create, root
+    access_log: [
+        {
+            _id: false,
+            package: String,
+            operation: String,
+            date: String,
+        }
+    ],
+})
 const packages = mongoose.model('warehouse_packages',packageSchema)
-module.exports = {packages}
+const users = mongoose.model('warehouse_users',userSchema)
+module.exports = {packages, users}

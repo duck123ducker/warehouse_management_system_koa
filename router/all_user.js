@@ -1,19 +1,19 @@
 const Router = require('koa-router');
-const all_pack = new Router();
-const {packages} = require('../db/models.js')
+const all_user = new Router();
+const {users} = require('../db/models.js')
 
-all_pack.get('/', async(ctx) => {
+all_user.get('/', async(ctx) => {
     const page = Number(ctx.query.page)
     if(page) {
         const PAGE_SIZE = 20;
         const skip = (page - 1) * PAGE_SIZE;
-        ctx.body = await packages.find()
+        ctx.body = await users.find()
             .sort({_id: -1}) // 按照_id倒序排列
             .skip(skip)
             .limit(PAGE_SIZE)
-            .select("-_id -__v -access_log")
+            .select("-_id -__v -passwd -access_log")
             .exec()
     }
 })
 
-module.exports = all_pack;
+module.exports = all_user;
