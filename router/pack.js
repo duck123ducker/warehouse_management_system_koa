@@ -5,7 +5,7 @@ const {packages} = require('../db/models.js')
 pack.get('/', async(ctx) => {
     const package_id = ctx.query.package_id
     if(ctx.query.package_id) {
-        let result = await packages.findOne({ id: package_id },{'_id': 0})
+        let result = await packages.findOne({ id: package_id },{'_id': 0, 'access_log': 0})
         if(!!result) {
             ctx.body = result
         }

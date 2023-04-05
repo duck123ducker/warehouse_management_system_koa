@@ -1,7 +1,6 @@
 const {users} = require('../db/models.js')
 async function access(id, path) {
-    const result = await users.findOne({id: id})
-    const role = result.role
+    const { role } = await users.findOne({ id: id }, { role: 1, _id: 0 }).lean()
     if (role === 'root') return true
     else {
         const access_control = {
@@ -13,7 +12,8 @@ async function access(id, path) {
             '/api/search_pack': [],
             '/api/static': [],
             '/api/modify_user': [],
-            '/api/all_user': []
+            '/api/all_user': [],
+            '/api/my_user_info': ['read', 'write', 'create']
         }
         return !!access_control[path].includes(role);
     }

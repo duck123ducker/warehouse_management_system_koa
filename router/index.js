@@ -10,6 +10,7 @@ const static_ = require('./static')
 const login = require('./login')
 const modify_user = require('./modify_user')
 const all_user = require('./all_user')
+const my_user_info = require('./my_user_info')
 
 router.use('/api/pack', pack.routes(), pack.allowedMethods());
 router.use('/api/update', update.routes(), update.allowedMethods());
@@ -21,4 +22,5 @@ router.use('/api/static', static_.routes(), static_.allowedMethods());
 router.use('/api/login', login.routes(), login.allowedMethods());
 router.use('/api/modify_user', modify_user.routes(), modify_user.allowedMethods());
 router.use('/api/all_user', all_user.routes(), all_user.allowedMethods());
+router.use('/api/my_user_info', my_user_info.routes(), my_user_info.allowedMethods());
 module.exports = router;
