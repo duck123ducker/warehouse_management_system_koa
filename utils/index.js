@@ -13,7 +13,7 @@ async function access(id, path) {
             '/api/static': [],
             '/api/modify_user': [],
             '/api/all_user': [],
-            '/api/my_user_info': ['read', 'write', 'create']
+            '/api/my_user_info': ['none', 'read', 'write', 'create']
         }
         return !!access_control[path].includes(role);
     }

@@ -11,6 +11,11 @@ update.post('/', async(ctx) => {
     }else if(method === 'outbound') {
         result.num -= Number(num)
     }
+    result.access_log.unshift({
+        user: ctx.state.user.id,
+        operation: method,
+        date: (Date.parse(new Date())/1000).toString(),
+    })
     await result.save()
     ctx.body = 'success'
 })
