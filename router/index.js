@@ -6,21 +6,23 @@ const create = require('./create')
 const modify = require('./modify')
 const all_pack = require('./all_pack')
 const search_pack = require('./search_pack')
-const static_ = require('./static')
+const statistic_ = require('./statistic_')
 const login = require('./login')
 const modify_user = require('./modify_user')
 const all_user = require('./all_user')
 const my_user_info = require('./my_user_info')
+const access__log = require('./access_log')
 
-router.use('/api/pack', pack.routes(), pack.allowedMethods());
-router.use('/api/update', update.routes(), update.allowedMethods());
-router.use('/api/create', create.routes(), create.allowedMethods());
-router.use('/api/modify', modify.routes(), modify.allowedMethods());
-router.use('/api/all_pack', all_pack.routes(), all_pack.allowedMethods());
-router.use('/api/search_pack', search_pack.routes(), search_pack.allowedMethods());
-router.use('/api/static', static_.routes(), static_.allowedMethods());
-router.use('/api/login', login.routes(), login.allowedMethods());
-router.use('/api/modify_user', modify_user.routes(), modify_user.allowedMethods());
-router.use('/api/all_user', all_user.routes(), all_user.allowedMethods());
-router.use('/api/my_user_info', my_user_info.routes(), my_user_info.allowedMethods());
+router.use('/api/pack', pack.routes(), pack.allowedMethods())
+router.use('/api/update', update.routes(), update.allowedMethods())
+router.use('/api/create', create.routes(), create.allowedMethods())
+router.use('/api/modify', modify.routes(), modify.allowedMethods())
+router.use('/api/all_pack', all_pack.routes(), all_pack.allowedMethods())
+router.use('/api/search_pack', search_pack.routes(), search_pack.allowedMethods())
+router.use('/api/statistic', statistic_.routes(), statistic_.allowedMethods())
+router.use('/api/login', login.routes(), login.allowedMethods())
+router.use('/api/modify_user', modify_user.routes(), modify_user.allowedMethods())
+router.use('/api/all_user', all_user.routes(), all_user.allowedMethods())
+router.use('/api/my_user_info', my_user_info.routes(), my_user_info.allowedMethods())
+router.use('/api/access_log', access__log.routes(), access__log.allowedMethods())
 module.exports = router;

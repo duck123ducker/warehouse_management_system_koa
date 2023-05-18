@@ -1,6 +1,7 @@
 const Router = require('koa-router');
 const update = new Router();
-const {packages} = require('../db/models.js')
+const {packages, logs} = require('../db/models.js')
+const {add_user_log} = require("../utils/index")
 
 update.post('/', async(ctx) => {
     const {pack_id, method, params} = ctx.request.body
@@ -11,12 +12,24 @@ update.post('/', async(ctx) => {
     }else if(method === 'outbound') {
         result.num -= Number(num)
     }
-    result.access_log.unshift({
-        user: ctx.state.user.id,
-        operation: method,
-        date: (Date.parse(new Date())/1000).toString(),
-    })
     await result.save()
+    await add_user_log(ctx.state.user.id, pack_id, method)
+    const log = await logs.findOne({date: new Date().toLocaleDateString()})
+    if(log) {
+        if(method === 'inbound') {
+            log.inbound+=num
+        }else if(method === 'outbound') {
+            log.outbound+=num
+        }
+        await log.save()
+    }else {
+        const newLog = new logs({
+            date: new Date().toLocaleDateString(),
+            inbound: method === 'inbound' ? 1 : 0,
+            outbound: method === 'outbound' ? 1 : 0
+        })
+        await newLog.save()
+    }
     ctx.body = 'success'
 })
 
